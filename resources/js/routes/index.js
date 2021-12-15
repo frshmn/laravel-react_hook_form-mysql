@@ -1,0 +1,6 @@
+export {default as Front } from './Front'
+// export {default as Step1 } from './Step1'
+// export {default as Step2 } from './Step2'
+// export {default as Step3 } from './Step3'
+export {default as Confirm } from './Confirm'
+export {default as Result } from './Result'

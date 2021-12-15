@@ -1,0 +1,103 @@
+
+//=============================================================
+//    RADIO SLIDER
+//=============================================================
+$number-of-options: 5;
+.radioSlider {
+  flex-direction: row;
+  align-content: stretch;
+  position: relative;
+  margin: auto;
+  width: 85%;
+  height: 50px;
+  user-select: none;
+
+  &::before {
+    content: " ";
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    width: calc(100% * (#{$number-of-options - 1} / #{$number-of-options}));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #282826;
+  }
+  input, label {
+    box-sizing: border-box;
+    flex: 1;
+    user-select: none;
+    cursor: pointer;
+  }
+  > div {
+    position: relative;
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+    user-select: none;
+    &:nth-child(1) {
+      label::after {
+        content: url('../../images/1.svg');
+      }
+    }
+    @for $i from 1 through $number-of-options {
+      &:nth-child(#{$i}) {
+        label::after { content: url('../../images/' + #{$i} + '.svg'); }
+        input:checked + label::after { content: url('../../images/' + #{$i} + '-wh.svg'); }
+      }
+    }
+    label {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      user-select: none;
+    }
+    label::before {
+      content: attr(data-amount);
+      position: absolute;
+      left: 50%;
+      padding-top: 5px;
+      transform: translate(-50%, 45px);
+      font-size: 14px;
+      letter-spacing: 0.4px;
+      font-weight: 400;
+      white-space: nowrap;
+      opacity: 0.85;
+      transition: all 0.15s ease-in-out;
+    }
+    label::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 30px;
+      // border: 2px solid #282826;
+      background: #fff;
+      border-radius: 50%;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      cursor: pointer;
+      transition: all 0.15s ease-in-out;
+    }
+    label:hover::after {
+      transform: translate(-50%, -50%) scale(1.25);
+    }
+  }
+  input {
+    display: none;
+    &:checked {
+      + label::before {
+        font-weight: 800;
+        opacity: 1;
+      }
+      + label::after {
+        background: #282826;
+        border-width: 4px;
+        transform: translate(-50%, -50%) scale(1.25);
+      }
+    }
+  }
+}
